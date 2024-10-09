@@ -1,0 +1,94 @@
+<script setup lang="ts">
+import { useCart } from "~/composables/useCart";
+import type { Product } from "~/types/ProductType";
+
+defineProps<{ product: Product }>();
+
+const { addToCart } = useCart();
+</script>
+
+<template>
+  <div
+    class="flex flex-col justify-evenly gap-3 p-4 border rounded-lg shadow-lg bg-white"
+  >
+    <NuxtLink :to="`/productdetails/${product.id}`">
+      <div>
+        <NuxtImg
+          :src="product.image"
+          format="webp"
+          densities="x1"
+          alt="Product Image"
+          class="h-48 object-cover rounded-md mb-2 block m-auto"
+        />
+      </div>
+    </NuxtLink>
+
+    <div class="flex items-center justify-between my-4">
+      <p
+        class="px-4 py-2 bg-blue-200 rounded-md text-xs text-blue-700 font-semibold"
+      >
+        Up to 35% off
+      </p>
+      <div class="flex items-center gap-6 mr-8 text-slate-500">
+        <Icon name="mdi:eye-outline" />
+        <Icon name="material-symbols:favorite-outline" />
+      </div>
+    </div>
+    <NuxtLink
+      :to="`/productdetails/${product.id}`"
+      class="text-slate-900 hover:text-blue-600"
+    >
+      <h2 class="text-lg font-bold mb-1">{{ product.title }}</h2>
+    </NuxtLink>
+
+    <div class="flex gap-2">
+      <div>
+        <Icon
+          name="ic:baseline-star-rate"
+          style="color: #f9f106"
+          v-for="n in Math.floor(product.rating.rate)"
+          :key="'full-' + n"
+        />
+
+        <Icon
+          v-if="product.rating.rate % 1 >= 0.5"
+          name="ic:outline-star-half"
+          style="color: #f9f106"
+          :key="'half'"
+        />
+
+        <Icon
+          name="ic:outline-star-rate"
+          style="color: #f9f106"
+          v-for="n in 5 - Math.ceil(product.rating.rate)"
+          :key="'outline-' + n"
+        />
+      </div>
+      <p class="text-sm text-slate-900">{{ product.rating.rate }}</p>
+      <p class="text-sm text-slate-400">({{ product.rating.count }})</p>
+    </div>
+
+    <div class="flex items-center gap-8 text-slate-400">
+      <div class="flex items-center gap-1">
+        <Icon name="iconoir:delivery-truck" />
+        <span>Fast Delivery</span>
+      </div>
+      <div class="flex items-center">
+        <Icon name="mdi:discount-box-outline" />
+        <span>Best Price</span>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <p class="text-2xl font-black text-slate-900 mb-1">
+        ${{ product.price }}
+      </p>
+      <button
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
+        @click="addToCart(product)"
+      >
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</template>
