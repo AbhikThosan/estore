@@ -45,11 +45,9 @@ onUnmounted(() => {
   >
     <nav class="container flex items-center justify-between mx-auto">
       <NuxtLink to="/" class="flex gap-1 items-center">
-        <NuxtImg
+        <img
           width="56px"
-          densities="x1"
-          format="webp"
-          src="/icon-green.png"
+          src="~/assets/icon-green.png"
           alt="EStore Logo"
         />
         <span class="text-3xl font-bold">EStore</span>

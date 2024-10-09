@@ -13,10 +13,8 @@ const { addToCart } = useCart();
   >
     <NuxtLink :to="`/productdetails/${product.id}`">
       <div>
-        <NuxtImg
+        <img
           :src="product.image"
-          format="webp"
-          densities="x1"
           alt="Product Image"
           class="h-48 object-cover rounded-md mb-2 block m-auto"
         />

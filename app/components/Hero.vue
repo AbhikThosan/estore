@@ -1,3 +1,4 @@
+<script setup lang="ts"></script>
 <template>
   <main>
     <section class="bg-[#f1f1f1] pt-6">
@@ -18,11 +19,8 @@
           </p>
         </div>
         <div class="flex-1 order-1 lg:order-2">
-          <NuxtImg
-            sizes="xs:100vw sm:667px"
-            src="/hero1.jpg"
-            format="webp"
-            densities="x1"
+          <img
+            src="~/assets/hero1.jpg"
             alt="Hero"
           />
         </div>
@@ -31,4 +29,3 @@
   </main>
 </template>
 
-<script setup lang="ts"></script>

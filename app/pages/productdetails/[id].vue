@@ -29,11 +29,9 @@ onMounted(() => {
 
     <div v-if="product" class="flex flex-col md:flex-row gap-6">
       <div class="flex-1">
-        <NuxtImg
+        <img
           :src="product.image"
           :alt="product.title"
-          format="webp"
-          densities="x1"
           class="object-content h-64 sm:h-80 md:h-[400px] lg:h-[500px] block m-auto"
         />
       </div>

@@ -56,7 +56,7 @@ const removeItem = () => {
     class="flex flex-col md:flex-row justify-between items-center gap-4 p-4 border rounded-lg shadow-md bg-white mb-4"
   >
     <div class="flex-shrink-0">
-      <NuxtImg
+      <img
         :src="product.image"
         :alt="product.title"
         class="h-24 w-24 md:h-32 md:w-32 object-contain"

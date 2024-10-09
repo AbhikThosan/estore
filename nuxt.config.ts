@@ -2,6 +2,8 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
 
+  ssr: false,
+
   future: {
     compatibilityVersion: 4,
   },
