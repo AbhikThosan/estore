@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { useSingleProduct } from "~/composables/useSingleProducts";
 import { useCart } from "~/composables/useCart";
 import { useFavoriteProduct } from "~/composables/useFavoriteProduct";
+import { useWatchList } from "~/composables/useWatchList";
 
 const route = useRoute();
 const productId = parseInt(route.params.id ? String(route.params.id) : "0", 10);
@@ -11,9 +12,14 @@ const productId = parseInt(route.params.id ? String(route.params.id) : "0", 10);
 const { product, loading, error, fetchSingleProduct } = useSingleProduct();
 const { addToCart } = useCart();
 const { addToFavorites } = useFavoriteProduct();
+const { addProductToWatchList } = useWatchList();
 
-onMounted(() => {
-  fetchSingleProduct(productId);
+onMounted(async () => {
+  await fetchSingleProduct(productId);
+
+  if (!error.value && product.value) {
+    addProductToWatchList(product.value);
+  }
 });
 </script>
 
@@ -32,7 +38,7 @@ onMounted(() => {
         <img
           :src="product.image"
           :alt="product.title"
-          class="object-content h-64 sm:h-80 md:h-[400px] lg:h-[500px] block m-auto"
+          class="object-content h-64 sm:h-80 md:h-[400px] block m-auto"
         />
       </div>
 

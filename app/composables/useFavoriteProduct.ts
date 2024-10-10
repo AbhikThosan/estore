@@ -29,6 +29,21 @@ export function useFavoriteProduct() {
     }
   };
 
+  const removeFromFavorites = (product: Product) => {
+    const index = favorites.items.findIndex((item) => item.id === product.id);
+
+    if (index !== -1) {
+      favorites.items.splice(index, 1);
+      $toast.error(`${product.title} removed from favorites!`, {
+        autoClose: 700,
+      });
+    } else {
+      $toast.error(`${product.title} is not in your favorites!`, {
+        autoClose: 700,
+      });
+    }
+  };
+
   if (isBrowser) {
     watch(
       () => favorites.items,
@@ -39,5 +54,5 @@ export function useFavoriteProduct() {
     );
   }
 
-  return { favorites, addToFavorites };
+  return { favorites, addToFavorites, removeFromFavorites };
 }
